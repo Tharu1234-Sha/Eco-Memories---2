@@ -202,18 +202,23 @@ void loop() {
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("How many bottles?");
+        lcd.print(key);
         Serial.println("Bottle count reset, please enter again.");
       }
       
       else if (key == 'D') {
         lcd.clear();
         lcd.setCursor(0, 0);
+        lcd.print("Keytags are full");
         Serial.println("Keytags are full");
         Nkeytag = 10 ;
          systemState = 4;
       }
       else if (key == 'B'){
         Bottle = 0 ;
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Bin is Empty");
         Serial.println("Bottle Count Rsset");
          systemState = 4;
       }
@@ -237,7 +242,11 @@ void loop() {
         actualBottleCount++;
         Serial.print("Bottle detected. Count: ");
         Serial.println(actualBottleCount);
-        delay(1000);
+        lcd.clear();
+        lcd.setCursor(0,1);
+        lcd.print("Count - ");
+        lcd.print(actualBottleCount);
+        delay(3000);
 
         
         
@@ -269,8 +278,12 @@ void loop() {
       Serial.println("You Win a Keytag");
       lcd.clear();
       lcd.setCursor(0, 1);
-      lcd.print(" You Win a Keytag ");
-      delay(3000);  // Run motor for 3 seconds
+      lcd.print(" You Won a Keytag ");
+      delay(1000);  // Run motor for 3 seconds
+      lcd.clear();
+      lcd.setCursor(0,2);
+      lcd.print("Thank you !");
+     
 
       Nkeytag--;
       Serial.println("No of keytags remaining:");
@@ -283,8 +296,12 @@ void loop() {
       lcd.clear();
       lcd.setCursor(0, 1);
       lcd.print("OOps!");
-       lcd.setCursor(1, 1);
+      lcd.setCursor(0, 2);
       lcd.print("You Lost The Chance");
+      delay(1000);
+      lcd.clear();
+      lcd.setCursor(0,2);
+      lcd.print("Thank you !");
      
       systemState = 4;
       }
