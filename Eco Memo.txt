@@ -49,6 +49,7 @@ int actualBottleCount = 0;
 int Bottle = 0;
 String bottleCountStr = "";  // To accumulate the digits entered
 int Nkeytag = 10;
+int Distance = 0;
 
 // Define char key
 char key;
@@ -324,14 +325,14 @@ distance = duration * 0.0344 / 2;
 Serial.println("Distance: " + String(distance) + " cm");
 
 String binstate;
-if (distance > 30) {
-   binstate = "true";
-} else {
+if (distance > 10) {
    binstate = "false";
+} else {
+   binstate = "ture";
 }
 
 // Send data to Firebase
-if (Firebase.setInt(firebaseData, "/IsFull", binstate == "true" ? 1 : 0)) {
+if (Firebase.setInt(firebaseData, "/IsFull", binstate == "false" ? 0 : 1)) {
    Serial.println("Bin State uploaded successfully!");
 } else {
    Serial.println("Firebase error: " + firebaseData.errorReason());
